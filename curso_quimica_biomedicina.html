@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso de Química para Biomedicina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ══════════ RESET & BASE ══════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Outfit',sans-serif;background:#0B1215;color:#E8ECED;overflow-x:hidden;min-height:100vh}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#0B1215}
+::-webkit-scrollbar-thumb{background:#2A4A4A;border-radius:9px}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer;border:none;outline:none}
+a{text-decoration:none;color:inherit}
+
+/* ══════════ CSS VARIABLES ══════════ */
+:root{
+  --bg:#0B1215;
+  --bg2:#101A1E;
+  --bg3:#162226;
+  --card:#14222A;
+  --card-hover:#1A2E38;
+  --border:#1E3640;
+  --text:#E8ECED;
+  --text2:#9BB0B8;
+  --text3:#5E7A84;
+  --accent:#00D4AA;
+  --accent2:#00B894;
+  --accent-glow:rgba(0,212,170,0.15);
+  --warm:#FF8A5C;
+  --warm2:#FFB347;
+  --danger:#FF6B6B;
+  --purple:#A29BFE;
+  --blue:#74B9FF;
+  --mod1:#00D4AA;
+  --mod2:#FF6B6B;
+  --mod3:#FFB347;
+  --mod4:#74B9FF;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'Outfit',sans-serif;
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow:0 4px 30px rgba(0,0,0,0.4);
+  --shadow-lg:0 8px 50px rgba(0,0,0,0.5);
+}
+
+/* ══════════ ANIMATIONS ══════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(0,212,170,0.2)}50%{box-shadow:0 0 40px rgba(0,212,170,0.4)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes popIn{0%{opacity:0;transform:scale(0.8)}100%{opacity:1;transform:scale(1)}}
+@keyframes breathe{0%,100%{opacity:0.6}50%{opacity:1}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes confetti1{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(400px) rotate(720deg);opacity:0}}
+@keyframes confetti2{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(350px) rotate(-540deg);opacity:0}}
+
+.animate-up{animation:fadeUp 0.6s ease both}
+.animate-in{animation:fadeIn 0.5s ease both}
+.animate-right{animation:slideRight 0.5s ease both}
+.animate-pop{animation:popIn 0.4s ease both}
+.delay-1{animation-delay:0.1s}
+.delay-2{animation-delay:0.2s}
+.delay-3{animation-delay:0.3s}
+.delay-4{animation-delay:0.4s}
+
+/* ══════════ NOISE TEXTURE ══════════ */
+body::before{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.4;
+}
+
+/* ══════════ LAYOUT ══════════ */
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* ══════════ HOME PAGE ══════════ */
+#home-page{min-height:100vh;position:relative}
+.hero{
+  padding:80px 20px 100px;text-align:center;position:relative;
+  background:radial-gradient(ellipse at 50% 0%,rgba(0,212,170,0.08) 0%,transparent 60%);
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+}
+.hero-badge{
+  display:inline-block;padding:6px 20px;border-radius:50px;
+  border:1px solid var(--accent);color:var(--accent);font-size:12px;
+  font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:24px;background:var(--accent-glow);
+  animation:fadeUp 0.6s ease both;
+}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(36px,7vw,72px);
+  color:var(--text);line-height:1.1;margin-bottom:20px;
+  animation:fadeUp 0.7s ease both;animation-delay:0.15s;
+}
+.hero h1 span{
+  background:linear-gradient(135deg,var(--accent),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero p{
+  font-size:clamp(15px,2vw,18px);color:var(--text2);max-width:560px;
+  margin:0 auto 40px;line-height:1.7;
+  animation:fadeUp 0.7s ease both;animation-delay:0.3s;
+}
+
+/* ══════════ MODULE CARDS ══════════ */
+.modules-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;max-width:1000px;margin:0 auto;padding:0 20px 80px;
+}
+.mod-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:32px 28px;cursor:pointer;transition:all 0.35s ease;position:relative;
+  overflow:hidden;
+}
+.mod-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  transition:height 0.3s ease;
+}
+.mod-card[data-mod="1"]::before{background:linear-gradient(90deg,var(--mod1),#00E6B8)}
+.mod-card[data-mod="2"]::before{background:linear-gradient(90deg,var(--mod2),#FF8E8E)}
+.mod-card[data-mod="3"]::before{background:linear-gradient(90deg,var(--mod3),#FFD93D)}
+.mod-card[data-mod="4"]::before{background:linear-gradient(90deg,var(--mod4),#A0D2FF)}
+.mod-card:hover{transform:translateY(-6px);border-color:transparent;box-shadow:var(--shadow-lg)}
+.mod-card:hover::before{height:4px}
+.mod-card-icon{font-size:42px;margin-bottom:16px;display:block}
+.mod-card-num{
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:6px;
+}
+.mod-card[data-mod="1"] .mod-card-num{color:var(--mod1)}
+.mod-card[data-mod="2"] .mod-card-num{color:var(--mod2)}
+.mod-card[data-mod="3"] .mod-card-num{color:var(--mod3)}
+.mod-card[data-mod="4"] .mod-card-num{color:var(--mod4)}
+.mod-card h3{font-family:var(--serif);font-size:22px;margin-bottom:10px;color:var(--text)}
+.mod-card p{font-size:14px;color:var(--text3);line-height:1.6;margin-bottom:18px}
+.mod-card-tags{display:flex;gap:8px;flex-wrap:wrap}
+.mod-card-tag{
+  padding:4px 12px;border-radius:8px;font-size:12px;font-weight:600;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text2);
+}
+
+/* ══════════ MODULE PAGE ══════════ */
+#module-page{display:none;min-height:100vh}
+.top-bar{
+  position:sticky;top:0;z-index:100;padding:12px 16px;
+  display:flex;align-items:center;gap:12px;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  background:rgba(11,18,21,0.85);border-bottom:1px solid var(--border);
+}
+.btn-back{
+  background:rgba(255,255,255,0.06);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:8px 16px;color:var(--text);
+  font-size:13px;font-weight:600;transition:all 0.2s;
+}
+.btn-back:hover{background:rgba(255,255,255,0.1)}
+.top-bar-info{flex:1;min-width:0}
+.top-bar-info small{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.top-bar-info h2{font-family:var(--serif);font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tab-switch{
+  display:flex;background:rgba(255,255,255,0.06);border-radius:12px;padding:3px;
+  border:1px solid var(--border);
+}
+.tab-btn{
+  padding:7px 16px;border-radius:10px;font-size:12px;font-weight:700;
+  color:var(--text3);background:transparent;transition:all 0.25s;white-space:nowrap;
+}
+.tab-btn.active{background:var(--accent);color:#0B1215}
+.btn-menu{
+  display:none;background:rgba(255,255,255,0.06);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:8px 12px;color:var(--text);font-size:18px;
+}
+
+/* ══════════ SIDEBAR ══════════ */
+.module-layout{display:flex;min-height:calc(100vh - 56px)}
+.sidebar{
+  width:280px;background:var(--bg2);border-right:1px solid var(--border);
+  padding:20px 0;overflow-y:auto;flex-shrink:0;
+  position:sticky;top:56px;height:calc(100vh - 56px);
+}
+.sidebar-label{
+  padding:0 20px;font-size:10px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--text3);margin-bottom:12px;
+}
+.sidebar-item{
+  display:flex;align-items:center;gap:12px;width:100%;padding:12px 20px;
+  background:transparent;border:none;border-left:3px solid transparent;
+  color:var(--text3);font-size:13px;font-weight:500;text-align:left;
+  transition:all 0.2s;cursor:pointer;
+}
+.sidebar-item:hover{background:rgba(255,255,255,0.03);color:var(--text2)}
+.sidebar-item.active{border-left-color:var(--accent);background:rgba(0,212,170,0.06);color:var(--accent)}
+.sidebar-num{
+  width:26px;height:26px;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;
+  background:rgba(255,255,255,0.05);color:var(--text3);transition:all 0.2s;
+}
+.sidebar-item.active .sidebar-num{background:var(--accent);color:#0B1215}
+.sidebar-divider{height:1px;background:var(--border);margin:16px 20px}
+.sidebar-mod-btn{
+  display:block;width:calc(100% - 40px);margin:2px 20px;padding:8px 12px;
+  border-radius:8px;background:transparent;border:none;text-align:left;
+  font-size:12px;font-weight:500;color:var(--text3);cursor:pointer;transition:all 0.2s;
+}
+.sidebar-mod-btn:hover{background:rgba(255,255,255,0.04);color:var(--text2)}
+.sidebar-mod-btn.current{color:var(--accent);font-weight:700}
+
+/* ══════════ CONTENT AREA ══════════ */
+.main-area{flex:1;padding:36px 28px 80px;overflow-y:auto;max-width:100%}
+.content-wrap{max-width:760px;margin:0 auto}
+.section-badge{
+  display:inline-block;padding:5px 14px;border-radius:8px;font-size:12px;
+  font-weight:700;margin-bottom:14px;
+}
+.content-title{
+  font-family:var(--serif);font-size:clamp(24px,4vw,34px);color:var(--text);
+  margin-bottom:28px;line-height:1.25;
+}
+.content-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:clamp(24px,4vw,36px);font-size:15px;line-height:1.85;color:var(--text2);
+  margin-bottom:28px;
+}
+.content-card strong{color:var(--text);font-weight:700}
+.content-card .highlight{
+  display:block;background:rgba(0,212,170,0.08);border-left:3px solid var(--accent);
+  padding:12px 16px;border-radius:0 10px 10px 0;margin:12px 0;font-size:14px;
+  color:var(--accent);
+}
+.content-card .emoji-line{margin:8px 0;display:flex;align-items:flex-start;gap:10px}
+.content-card .emoji-line .emoji{flex-shrink:0;font-size:16px;margin-top:2px}
+
+/* ══════════ NAVIGATION BUTTONS ══════════ */
+.nav-buttons{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:8px}
+.btn-nav{
+  padding:12px 24px;border-radius:14px;font-size:14px;font-weight:700;
+  transition:all 0.3s;display:flex;align-items:center;gap:8px;
+}
+.btn-prev{background:var(--card);border:1px solid var(--border);color:var(--text2)}
+.btn-prev:hover{background:var(--card-hover);color:var(--text)}
+.btn-next{background:var(--accent);color:#0B1215;border:none}
+.btn-next:hover{background:var(--accent2);transform:translateY(-2px)}
+.btn-quiz{background:linear-gradient(135deg,var(--warm),var(--warm2));color:#0B1215;border:none}
+.btn-quiz:hover{transform:translateY(-2px)}
+
+/* ══════════ QUIZ ══════════ */
+.quiz-header{text-align:center;margin-bottom:36px}
+.quiz-header .q-icon{font-size:44px;margin-bottom:12px;display:block}
+.quiz-header h2{font-family:var(--serif);font-size:28px;margin-bottom:6px}
+.quiz-header p{color:var(--text3);font-size:14px}
+.quiz-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:28px;margin-bottom:22px;transition:all 0.3s;
+}
+.quiz-card.correct{border-color:var(--accent)}
+.quiz-card.wrong{border-color:var(--warm)}
+.q-top{display:flex;gap:12px;align-items:flex-start;margin-bottom:18px}
+.q-badge{
+  padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700;
+  flex-shrink:0;color:#0B1215;
+}
+.q-text{font-size:15px;font-weight:600;color:var(--text);line-height:1.6}
+.q-options{display:grid;gap:10px;margin-bottom:4px}
+.q-option{
+  display:flex;align-items:center;gap:14px;padding:14px 18px;
+  border-radius:12px;background:rgba(255,255,255,0.03);border:2px solid var(--border);
+  font-size:14px;color:var(--text2);transition:all 0.25s;text-align:left;
+}
+.q-option:hover:not(.locked){background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1)}
+.q-option.selected{border-color:var(--accent);background:rgba(0,212,170,0.08);color:var(--text)}
+.q-option.locked{cursor:default}
+.q-option.revealed-right{border-color:var(--accent);background:rgba(0,212,170,0.1);color:var(--accent)}
+.q-option.revealed-wrong{border-color:var(--warm);background:rgba(255,138,92,0.08);color:var(--warm)}
+.q-letter{
+  width:30px;height:30px;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;
+  background:rgba(255,255,255,0.06);color:var(--text3);transition:all 0.2s;
+}
+.q-option.selected .q-letter{background:var(--accent);color:#0B1215}
+.q-option.revealed-right .q-letter{background:var(--accent);color:#0B1215}
+.q-option.revealed-wrong .q-letter{background:var(--warm);color:#0B1215}
+.btn-check{
+  margin-top:14px;padding:10px 24px;border-radius:12px;font-size:13px;
+  font-weight:700;background:var(--accent);color:#0B1215;transition:all 0.3s;
+}
+.btn-check:hover{background:var(--accent2)}
+.q-feedback{
+  border-radius:12px;padding:16px 20px;margin-top:14px;
+  animation:slideDown 0.3s ease both;
+}
+.q-feedback.is-correct{background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.2)}
+.q-feedback.is-wrong{background:rgba(255,179,71,0.08);border:1px solid rgba(255,179,71,0.15)}
+.q-feedback-title{font-weight:700;font-size:14px;margin-bottom:6px}
+.q-feedback.is-correct .q-feedback-title{color:var(--accent)}
+.q-feedback.is-wrong .q-feedback-title{color:var(--warm2)}
+.q-feedback-text{font-size:13px;color:var(--text2);line-height:1.65}
+
+/* Score */
+.score-box{
+  border-radius:20px;padding:40px 28px;text-align:center;margin-top:20px;
+  position:relative;overflow:hidden;
+}
+.score-box .score-num{font-size:52px;font-weight:800;font-family:var(--serif)}
+.score-box .score-msg{font-size:17px;margin:8px 0 20px;opacity:0.9}
+.btn-redo{
+  padding:12px 28px;border-radius:12px;font-size:14px;font-weight:700;
+  background:rgba(255,255,255,0.15);color:#fff;border:2px solid rgba(255,255,255,0.25);
+  transition:all 0.3s;backdrop-filter:blur(4px);
+}
+.btn-redo:hover{background:rgba(255,255,255,0.25)}
+
+/* ══════════ BREAK POPUP ══════════ */
+.popup-overlay{
+  position:fixed;top:0;left:0;right:0;bottom:0;z-index:9000;
+  background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;padding:20px;
+  animation:fadeIn 0.3s ease;
+}
+.popup-overlay.show{display:flex}
+.popup-box{
+  background:var(--bg2);border:1px solid var(--border);border-radius:24px;
+  padding:48px 40px;max-width:480px;width:100%;text-align:center;
+  position:relative;overflow:hidden;animation:popIn 0.4s ease both;
+}
+.popup-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--blue),var(--purple));
+}
+.popup-icon{font-size:64px;margin-bottom:16px;display:block;animation:float 3s ease infinite}
+.popup-box h3{font-family:var(--serif);font-size:26px;margin-bottom:10px;color:var(--text)}
+.popup-box p{color:var(--text2);font-size:15px;line-height:1.7;margin-bottom:8px}
+.popup-timer{
+  font-size:48px;font-weight:800;font-family:var(--serif);margin:20px 0;
+  background:linear-gradient(135deg,var(--accent),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.popup-tips{
+  background:rgba(255,255,255,0.03);border-radius:14px;padding:16px 20px;
+  margin:16px 0 24px;text-align:left;
+}
+.popup-tips p{font-size:13px;color:var(--text3);margin:6px 0;display:flex;align-items:center;gap:8px}
+.btn-popup{
+  padding:14px 36px;border-radius:14px;font-size:15px;font-weight:700;
+  background:var(--accent);color:#0B1215;transition:all 0.3s;
+}
+.btn-popup:hover{background:var(--accent2);transform:translateY(-2px)}
+.btn-popup:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+/* ══════════ PROGRESS BAR ══════════ */
+.progress-bar{
+  position:fixed;top:0;left:0;height:3px;z-index:200;
+  transition:width 0.4s ease;
+}
+
+/* ══════════ MOBILE RESPONSIVE ══════════ */
+@media(max-width:768px){
+  .sidebar{
+    position:fixed;top:0;left:0;bottom:0;width:300px;z-index:500;
+    transform:translateX(-100%);transition:transform 0.3s ease;
+    padding-top:60px;
+  }
+  .sidebar.open{transform:translateX(0)}
+  .mobile-overlay{
+    position:fixed;top:0;left:0;right:0;bottom:0;z-index:400;
+    background:rgba(0,0,0,0.6);display:none;
+  }
+  .mobile-overlay.show{display:block}
+  .btn-menu{display:flex !important;align-items:center;justify-content:center}
+  .main-area{padding:24px 16px 80px}
+  .content-card{padding:20px}
+  .quiz-card{padding:20px}
+  .hero{padding:60px 20px 80px}
+  .tab-btn{padding:7px 12px;font-size:11px}
+  .top-bar{gap:8px;padding:10px 12px}
+  .btn-back span.back-text{display:none}
+  .popup-box{padding:36px 24px}
+}
+@media(min-width:769px){
+  .btn-menu{display:none !important}
+  .mobile-overlay{display:none !important}
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ══════════ HOME PAGE ══════════ -->
+<div id="home-page">
+  <div class="hero">
+    <div class="hero-badge">Curso Completo</div>
+    <h1>Química para<br><span>Biomedicina</span></h1>
+    <p>Dos conceitos fundamentais às reações químicas — aprenda no seu ritmo com conteúdo detalhado e exercícios interativos.</p>
+  </div>
+
+  <div class="modules-grid" id="modulesGrid">
+    <!-- JS will populate -->
+  </div>
+</div>
+
+<!-- ══════════ MODULE PAGE ══════════ -->
+<div id="module-page">
+  <!-- Top bar -->
+  <div class="top-bar">
+    <button class="btn-back" onclick="goHome()">← <span class="back-text">Início</span></button>
+    <button class="btn-menu" id="btnMenu" onclick="toggleSidebar()">☰</button>
+    <div class="top-bar-info">
+      <small id="topModNum"></small>
+      <h2 id="topModTitle"></h2>
+    </div>
+    <div class="tab-switch">
+      <button class="tab-btn active" id="tabContent" onclick="switchTab('content')">📖 Conteúdo</button>
+      <button class="tab-btn" id="tabQuiz" onclick="switchTab('quiz')">✏️ Atividades</button>
+    </div>
+  </div>
+
+  <div class="module-layout">
+    <!-- Mobile overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-label">Tópicos</div>
+      <div id="sidebarTopics"></div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-label">Módulos</div>
+      <div id="sidebarModules"></div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main-area" id="mainArea">
+      <div class="content-wrap" id="contentWrap">
+        <!-- JS will populate -->
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ══════════ BREAK POPUP ══════════ -->
+<div class="popup-overlay" id="breakPopup">
+  <div class="popup-box">
+    <span class="popup-icon">☕</span>
+    <h3>Hora de uma pausa!</h3>
+    <p>Você completou 2 módulos — incrível! Agora dê uns 10 minutinhos para seu cérebro descansar e absorver tudo.</p>
+    <div class="popup-timer" id="breakTimer">10:00</div>
+    <div class="popup-tips">
+      <p>💧 Beba um copo d'água</p>
+      <p>🚶 Levante e caminhe um pouco</p>
+      <p>👁️ Descanse os olhos olhando para longe</p>
+      <p>🧘 Respire fundo algumas vezes</p>
+    </div>
+    <button class="btn-popup" id="btnBreak" onclick="closeBreak()">Estou pronto para continuar! 🚀</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  DATA — ALL 4 MODULES
+// ══════════════════════════════════════════════════════
+const MODULES = [
+{
+  id:1, title:"Introdução à Química", subtitle:"Conceitos fundamentais, sistemas, fases e propriedades da matéria",
+  icon:"⚗️", color:"var(--mod1)", colorHex:"#00D4AA",
+  sections:[
+    {
+      title:"O que é Química?",
+      html:`<p>A <strong>Química</strong> é uma ciência diretamente ligada à nossa vida cotidiana. Desde a produção do pão até a digestão dos alimentos, dos medicamentos aos combustíveis, das tintas ao cimento — tudo está conectado ao universo químico.</p>
+      <p>Na <strong>Biomedicina</strong>, a Química é a base fundamental para compreender processos fisiológicos, realizar análises clínicas e desenvolver novos fármacos. Sem ela, não seria possível entender como nosso corpo funciona a nível molecular.</p>
+      <div class="highlight">A Química estuda a composição, estrutura, propriedades e transformações da matéria, bem como a energia envolvida nessas transformações.</div>
+      <p>Exemplos de aplicações no cotidiano:</p>
+      <div class="emoji-line"><span class="emoji">🏥</span><span><strong>Saúde:</strong> Medicamentos, exames laboratoriais, vacinas</span></div>
+      <div class="emoji-line"><span class="emoji">🍞</span><span><strong>Alimentos:</strong> Produção, conservação, fermentação</span></div>
+      <div class="emoji-line"><span class="emoji">⛽</span><span><strong>Materiais:</strong> Combustíveis, plásticos, tecidos</span></div>
+      <div class="emoji-line"><span class="emoji">🌿</span><span><strong>Natureza:</strong> Fotossíntese, ciclo da água, decomposição</span></div>`
+    },
+    {
+      title:"Sistemas Homogêneos e Heterogêneos",
+      html:`<p><strong>Sistema</strong> é uma parte do universo considerada como um todo para efeito de estudo.</p>
+      <div class="highlight">Todo estudo em Química começa pela definição de um sistema — é o "recorte" que fazemos da realidade para poder analisar.</div>
+      <p>Os sistemas podem ser classificados em dois tipos:</p>
+      <div class="emoji-line"><span class="emoji">🟢</span><span><strong>Sistema Homogêneo:</strong> Apresenta as mesmas propriedades em qualquer parte de sua extensão. Tem aspecto uniforme em toda a sua extensão, mesmo quando examinado com aparelhos ópticos.<br>📌 Exemplo: <em>Água + Álcool</em> — mistura completamente uniforme.</span></div>
+      <div class="emoji-line"><span class="emoji">🔴</span><span><strong>Sistema Heterogêneo:</strong> NÃO apresenta as mesmas propriedades em qualquer parte de sua extensão. Não tem aspecto uniforme quando examinado (com ou sem aparelhos ópticos).<br>📌 Exemplo: <em>Água + Óleo</em> — as fases são claramente visíveis.</span></div>`
+    },
+    {
+      title:"Fases e Componentes",
+      html:`<p><strong>Fases</strong> são as diferentes partes homogêneas que constituem um sistema heterogêneo.</p>
+      <div class="emoji-line"><span class="emoji">1️⃣</span><span>Todo sistema homogêneo é <strong>monofásico</strong> — constituído de uma única fase.</span></div>
+      <div class="emoji-line"><span class="emoji">2️⃣</span><span>Todo sistema heterogêneo é <strong>polifásico</strong> — constituído de duas ou mais fases (bifásico, trifásico, tetrafásico, etc.).</span></div>
+      <div class="highlight">Sistemas formados por dois ou mais sólidos diferentes são SEMPRE polifásicos (heterogêneos)!</div>
+      <p><strong>Exemplo — Granito:</strong></p>
+      <div class="emoji-line"><span class="emoji">🪨</span><span>Quartzo (sólido) + Feldspato (sólido) + Mica (sólido)<br>→ <strong>3 componentes, 3 fases</strong> → Sistema heterogêneo trifásico</span></div>
+      <p><strong>Exemplo — Água + Óleo + Areia:</strong></p>
+      <div class="emoji-line"><span class="emoji">🧪</span><span>3 componentes → 4 fases (água líquida, óleo líquido, areia sólida, ar gasoso)<br>→ Sistema heterogêneo polifásico</span></div>`
+    },
+    {
+      title:"Matéria, Corpo e Objeto",
+      html:`<div class="highlight">Matéria é todo sistema que possui massa e ocupa lugar no espaço.</div>
+      <p>A matéria se classifica em uma hierarquia importante:</p>
+      <div class="emoji-line"><span class="emoji">🔹</span><span><strong>Matéria</strong> → Tudo que tem massa e ocupa espaço (ex.: madeira)</span></div>
+      <div class="emoji-line"><span class="emoji">🔹</span><span><strong>Corpo</strong> → Porção limitada da matéria (ex.: tábua de madeira)</span></div>
+      <div class="emoji-line"><span class="emoji">🔹</span><span><strong>Objeto</strong> → Corpo com finalidade determinada (ex.: mesa de madeira)</span></div>
+      <p>Outros conceitos essenciais:</p>
+      <div class="emoji-line"><span class="emoji">🧬</span><span><strong>Substância:</strong> Espécie de matéria formada por átomos de elementos específicos em proporções específicas. Cada substância possui um conjunto definido de propriedades e composição química.</span></div>
+      <div class="emoji-line"><span class="emoji">⚛️</span><span><strong>Partículas:</strong> São as formadoras das substâncias — podem ser <em>íons</em>, <em>átomos</em> e <em>moléculas</em> (conjuntos de átomos).</span></div>`
+    },
+    {
+      title:"Propriedades Gerais da Matéria",
+      html:`<p>São propriedades que <strong>TODOS</strong> os corpos apresentam, independentemente do material:</p>
+      <div class="emoji-line"><span class="emoji">⚖️</span><span><strong>Massa</strong> — Quantidade de matéria que forma um corpo.</span></div>
+      <div class="emoji-line"><span class="emoji">📏</span><span><strong>Extensão</strong> — Espaço ocupado (volume/dimensão) de um corpo.</span></div>
+      <div class="emoji-line"><span class="emoji">🚫</span><span><strong>Impenetrabilidade</strong> — Dois corpos não podem ocupar o mesmo lugar no espaço ao mesmo tempo.</span></div>
+      <div class="emoji-line"><span class="emoji">🔽</span><span><strong>Compressibilidade</strong> — Capacidade de reduzir o volume quando submetido a compressão.</span></div>
+      <div class="emoji-line"><span class="emoji">🔄</span><span><strong>Elasticidade</strong> — Capacidade de retornar à forma inicial após cessar a deformação.</span></div>
+      <div class="emoji-line"><span class="emoji">✂️</span><span><strong>Divisibilidade</strong> — Pode ser dividido em porções cada vez menores sem alterar sua constituição.</span></div>
+      <div class="emoji-line"><span class="emoji">⏸️</span><span><strong>Inércia</strong> — Um corpo não pode, por si só, modificar sua condição de repouso ou movimento.</span></div>`
+    },
+    {
+      title:"Propriedades Específicas da Matéria",
+      html:`<p>Permitem <strong>distinguir</strong> uma espécie de matéria de outra. Dividem-se em:</p>
+      <div class="emoji-line"><span class="emoji">🔬</span><span><strong>Propriedades Físicas:</strong> Caracterizam uma substância SEM alterar sua composição.<br>Exemplos: Temperatura de fusão, ebulição, densidade, solubilidade, calor específico.</span></div>
+      <div class="emoji-line"><span class="emoji">⚗️</span><span><strong>Propriedades Químicas:</strong> Caracterizam por ALTERAÇÃO da composição.<br>Exemplos: Decomposição térmica do carbonato de cálcio, oxidação do ferro (ferrugem).</span></div>
+      <div class="emoji-line"><span class="emoji">👁️</span><span><strong>Propriedades Organolépticas:</strong> Impressionam os cinco sentidos.<br>Exemplos: Cor, sabor, odor, brilho, textura.</span></div>
+      <div class="highlight"><strong>Intensivas</strong> — Não dependem do tamanho (temperatura, pressão, PF, PE, concentração).<br><strong>Extensivas</strong> — Dependem do tamanho (massa, volume, energia, entropia).</div>`
+    }
+  ],
+  quiz:[
+    {q:"Um sistema constituído por açúcar dissolvido em água, limalha de ferro, vapor-d'água e nitrogênio gasoso pode ser classificado como:",opts:["Heterogêneo, 4 fases, 3 componentes","Homogêneo, 4 fases, 4 componentes","Heterogêneo, 3 fases, 3 componentes","Heterogêneo, 3 fases, 4 componentes"],c:3,exp:"São 4 componentes (açúcar, água, ferro, nitrogênio) e 3 fases: fase líquida (água+açúcar), fase sólida (ferro) e fase gasosa (vapor+nitrogênio). O sistema é heterogêneo pois possui fases distintas."},
+    {q:"Qual das propriedades a seguir NÃO é uma propriedade geral da matéria?",opts:["Indestrutibilidade","Extensão","Combustibilidade","Divisibilidade"],c:2,exp:"Combustibilidade é uma propriedade específica (química), não geral. Apenas algumas substâncias são combustíveis, enquanto as propriedades gerais são comuns a toda matéria."},
+    {q:"Um pedaço de isopor flutua na água, mas o ferro afunda. Que propriedade explica isso?",opts:["Impenetrabilidade","Densidade","Descontinuidade","Maleabilidade"],c:1,exp:"A densidade é uma propriedade específica que determina se um material flutua ou afunda. O isopor tem densidade menor que a água, enquanto o ferro tem densidade maior."},
+    {q:"O que diferencia um sistema homogêneo de um heterogêneo?",opts:["O número de componentes","A quantidade de matéria","O aspecto uniforme em toda a extensão","A temperatura do sistema"],c:2,exp:"O sistema homogêneo apresenta aspecto uniforme (uma única fase), enquanto o heterogêneo apresenta regiões com propriedades diferentes (múltiplas fases)."},
+    {q:"A temperatura de fusão de uma substância é uma propriedade:",opts:["Geral e extensiva","Específica e intensiva","Geral e intensiva","Específica e extensiva"],c:1,exp:"A temperatura de fusão é específica (cada substância tem a sua) e intensiva (não depende da quantidade — 1g ou 1kg de gelo derretem à mesma temperatura)."}
+  ]
+},
+{
+  id:2, title:"Preceitos de Laboratório", subtitle:"Segurança, boas práticas e estrutura de relatórios científicos",
+  icon:"🛡️", color:"var(--mod2)", colorHex:"#FF6B6B",
+  sections:[
+    {
+      title:"Vestimenta e Proteção Individual",
+      html:`<p>A segurança no laboratório começa pela <strong>vestimenta adequada</strong>. Estas regras são obrigatórias:</p>
+      <div class="emoji-line"><span class="emoji">🥼</span><span><strong>Jaleco:</strong> Sempre fechado — protege contra respingos de substâncias químicas.</span></div>
+      <div class="emoji-line"><span class="emoji">👖</span><span><strong>Calça comprida:</strong> Protege as pernas. Bermudas e saias são proibidas.</span></div>
+      <div class="emoji-line"><span class="emoji">👟</span><span><strong>Sapatos fechados:</strong> Protegem os pés contra derramamentos. Sandálias e chinelos são proibidos.</span></div>
+      <div class="emoji-line"><span class="emoji">💇</span><span><strong>Cabelos longos:</strong> Devem estar sempre presos para evitar contato com chamas ou substâncias.</span></div>
+      <div class="highlight">Antes de iniciar qualquer atividade, localize onde ficam os equipamentos de segurança: extintor, chuveiro de emergência, lava-olhos.</div>`
+    },
+    {
+      title:"Manuseio de Materiais e Substâncias",
+      html:`<p>O cuidado com materiais e substâncias é essencial para evitar acidentes:</p>
+      <div class="emoji-line"><span class="emoji">🔍</span><span><strong>Peças de vidro:</strong> Devem ser perfeitas, sem arestas, bordas cortantes ou rachaduras.</span></div>
+      <div class="emoji-line"><span class="emoji">🧪</span><span><strong>Reagentes:</strong> Sempre leia o rótulo ANTES de usar. Segure o frasco com o rótulo voltado para a palma da mão.</span></div>
+      <div class="emoji-line"><span class="emoji">⚠️</span><span><strong>NUNCA</strong> prove substâncias nem aspire gases/vapores sem verificar toxicidade.</span></div>
+      <div class="emoji-line"><span class="emoji">🔥</span><span><strong>Aquecimento:</strong> Nunca aqueça substâncias em recipientes fechados (risco de explosão). Ao aquecer tubos de ensaio, coloque o fogo na lateral, nunca no fundo. Nunca direcione a boca do tubo para uma pessoa.</span></div>
+      <div class="emoji-line"><span class="emoji">💨</span><span><strong>Gás:</strong> Feche com cuidado as torneiras para evitar vazamentos.</span></div>
+      <div class="emoji-line"><span class="emoji">🧤</span><span><strong>Higiene:</strong> Não toque boca, olhos ou nariz no laboratório. Lave as mãos ao sair.</span></div>`
+    },
+    {
+      title:"Cuidados com Temperatura e Método",
+      html:`<div class="emoji-line"><span class="emoji">🌡️</span><span><strong>Materiais quentes:</strong> Nunca deixe peças quentes em locais acessíveis onde alguém possa pegá-las.</span></div>
+      <div class="emoji-line"><span class="emoji">❄️</span><span><strong>Choque térmico:</strong> Não coloque vidro quente sobre superfícies frias — pode trincar ou estilhaçar.</span></div>
+      <div class="emoji-line"><span class="emoji">📋</span><span><strong>Método:</strong> Trabalhe com método, atenção e calma. Leia TODOS os procedimentos antes de iniciar.</span></div>
+      <div class="emoji-line"><span class="emoji">🚨</span><span><strong>Acidentes:</strong> Qualquer acidente, por menor que seja, deve ser comunicado imediatamente ao professor.</span></div>
+      <div class="highlight">O laboratório é um ambiente seguro QUANDO as regras são seguidas. A maior parte dos acidentes ocorre por desatenção ou pressa.</div>`
+    },
+    {
+      title:"Estrutura do Relatório Científico",
+      html:`<p>Todo experimento deve ser documentado em um relatório bem estruturado:</p>
+      <div class="emoji-line"><span class="emoji">📝</span><span><strong>1. Introdução</strong> — Contextualização teórica. O que se sabe sobre o assunto?</span></div>
+      <div class="emoji-line"><span class="emoji">🎯</span><span><strong>2. Objetivo</strong> — O que se pretende alcançar ou demonstrar?</span></div>
+      <div class="emoji-line"><span class="emoji">🔧</span><span><strong>3. Procedimento</strong> — Passo a passo de como foi realizado (materiais e metodologia).</span></div>
+      <div class="emoji-line"><span class="emoji">📊</span><span><strong>4. Resultados e Discussão</strong> — Dados obtidos e análise crítica. Compare com o esperado.</span></div>
+      <div class="emoji-line"><span class="emoji">✅</span><span><strong>5. Conclusão</strong> — Resumo do aprendizado. Os objetivos foram atingidos?</span></div>
+      <div class="emoji-line"><span class="emoji">📚</span><span><strong>6. Referências Bibliográficas</strong> — Fontes consultadas.</span></div>
+      <div class="emoji-line"><span class="emoji">📎</span><span><strong>7. Anexos</strong> — Tabelas, gráficos, fotos ou materiais complementares.</span></div>`
+    }
+  ],
+  quiz:[
+    {q:"Qual é a vestimenta obrigatória para entrar em um laboratório de Química?",opts:["Jaleco, bermuda e sapato fechado","Jaleco, calça comprida e sapato fechado","Camiseta, calça comprida e sandália","Jaleco, calça comprida e chinelo"],c:1,exp:"A vestimenta obrigatória inclui jaleco, calça comprida e sapatos fechados. Cabelos longos também devem estar presos."},
+    {q:"Ao manusear um frasco de reagente, como você deve segurá-lo?",opts:["Com o rótulo voltado para cima","Com o rótulo voltado para fora","Com o rótulo voltado para a palma da mão","Não importa a posição do rótulo"],c:2,exp:"O frasco deve ser segurado com o rótulo voltado para a palma da mão, assim respingos escorrem pelo lado oposto e não danificam as informações."},
+    {q:"Por que não se deve aquecer substâncias em recipientes fechados?",opts:["Porque a substância evapora","Porque o recipiente pode explodir pela pressão","Porque altera a composição","Porque o vidro fica opaco"],c:1,exp:"Ao aquecer um recipiente fechado, os gases aumentam a pressão interna, podendo causar explosão. Sempre aqueça em recipientes abertos."},
+    {q:"Qual seção do relatório descreve como o experimento foi realizado?",opts:["Introdução","Objetivo","Procedimento","Resultados e Discussão"],c:2,exp:"O Procedimento descreve passo a passo como o experimento foi conduzido, incluindo materiais e técnicas."},
+    {q:"O que fazer ao encontrar uma peça de vidro com rachaduras?",opts:["Usar com cuidado","Não utilizar e comunicar ao professor","Aquecer para selar a rachadura","Usar apenas para substâncias frias"],c:1,exp:"Peças com arestas ou rachaduras NÃO devem ser utilizadas. Podem causar cortes graves ou quebrar durante o uso."}
+  ]
+},
+{
+  id:3, title:"Transformações da Matéria", subtitle:"Fenômenos físicos e químicos, mudanças de estado",
+  icon:"🔥", color:"var(--mod3)", colorHex:"#FFB347",
+  sections:[
+    {
+      title:"Estados Físicos da Matéria",
+      html:`<p>Na natureza, a matéria pode apresentar-se em <strong>três estados físicos</strong> fundamentais:</p>
+      <div class="emoji-line"><span class="emoji">🧊</span><span><strong>Estado Sólido</strong> — Partículas muito próximas e organizadas. Forma e volume definidos.</span></div>
+      <div class="emoji-line"><span class="emoji">💧</span><span><strong>Estado Líquido</strong> — Partículas próximas mas com mobilidade. Volume definido, forma variável.</span></div>
+      <div class="emoji-line"><span class="emoji">💨</span><span><strong>Estado Gasoso</strong> — Partículas afastadas com grande mobilidade. Forma e volume variáveis.</span></div>
+      <div class="highlight">A passagem de um estado para outro são mudanças de estado físico — fenômenos FÍSICOS que não alteram a composição da matéria.</div>`
+    },
+    {
+      title:"Mudanças de Estado Físico",
+      html:`<p>As mudanças de estado são provocadas por variações de <strong>temperatura e/ou pressão</strong>:</p>
+      <p><strong>🔼 Aquecimento (aumento de temperatura):</strong></p>
+      <div class="emoji-line"><span class="emoji">🫠</span><span><strong>Fusão:</strong> Sólido → Líquido (gelo derretendo)</span></div>
+      <div class="emoji-line"><span class="emoji">♨️</span><span><strong>Vaporização:</strong> Líquido → Gasoso (água fervendo)</span></div>
+      <div class="emoji-line"><span class="emoji">✨</span><span><strong>Sublimação:</strong> Sólido → Gasoso (naftalina evaporando)</span></div>
+      <p><strong>🔽 Resfriamento (diminuição de temperatura):</strong></p>
+      <div class="emoji-line"><span class="emoji">🧊</span><span><strong>Solidificação:</strong> Líquido → Sólido (água congelando)</span></div>
+      <div class="emoji-line"><span class="emoji">💧</span><span><strong>Condensação/Liquefação:</strong> Gasoso → Líquido (vapor virando gotas)</span></div>
+      <div class="emoji-line"><span class="emoji">❄️</span><span><strong>Ressublimação:</strong> Gasoso → Sólido (formação de geada)</span></div>
+      <div class="highlight">As moléculas se mantêm as mesmas nas mudanças de estado — muda apenas o grau de agitação!</div>`
+    },
+    {
+      title:"Fenômenos Físicos",
+      html:`<p><strong>Fenômenos físicos</strong> são transformações que <strong>NÃO alteram</strong> a estrutura interna da matéria. A identidade química permanece inalterada.</p>
+      <p>Exemplos:</p>
+      <div class="emoji-line"><span class="emoji">🍅</span><span>Produção de suco de tomate (trituração)</span></div>
+      <div class="emoji-line"><span class="emoji">⚡</span><span>Condução de corrente elétrica em fio de cobre</span></div>
+      <div class="emoji-line"><span class="emoji">💨</span><span>Evaporação da água: H₂O(l) → H₂O(v)</span></div>
+      <div class="emoji-line"><span class="emoji">🍬</span><span>Dissolução do açúcar na água</span></div>
+      <div class="emoji-line"><span class="emoji">🧊</span><span>Sublimação do gelo seco</span></div>
+      <div class="emoji-line"><span class="emoji">🍔</span><span>Moer carne para hambúrguer</span></div>
+      <div class="emoji-line"><span class="emoji">👕</span><span>Roupa secando no varal</span></div>
+      <div class="emoji-line"><span class="emoji">🍦</span><span>Picolé derretendo</span></div>
+      <div class="highlight">Em todos esses exemplos, as substâncias mantêm sua identidade química — apenas mudam de estado, forma ou posição.</div>`
+    },
+    {
+      title:"Fenômenos Químicos",
+      html:`<p><strong>Fenômenos químicos</strong> são transformações que <strong>MUDAM</strong> a identidade química das substâncias (os átomos se rearranjam formando novas substâncias).</p>
+      <p>Exemplos:</p>
+      <div class="emoji-line"><span class="emoji">🍷</span><span>Produção de etanol/vinho (fermentação)</span></div>
+      <div class="emoji-line"><span class="emoji">🍌</span><span>Apodrecimento e amadurecimento de frutas</span></div>
+      <div class="emoji-line"><span class="emoji">🥚</span><span>Cozimento de ovo (desnaturação proteica)</span></div>
+      <div class="emoji-line"><span class="emoji">🔩</span><span>Ferrugem: O₂ + Fe + H₂O → Fe₂O₃·H₂O</span></div>
+      <div class="emoji-line"><span class="emoji">💊</span><span>Comprimido efervescente na água</span></div>
+      <div class="emoji-line"><span class="emoji">🪵</span><span>Combustão da madeira</span></div>
+      <p><strong>🔍 Sinais que identificam um fenômeno químico:</strong></p>
+      <div class="emoji-line"><span class="emoji">🎨</span><span>Mudança de cor</span></div>
+      <div class="emoji-line"><span class="emoji">🫧</span><span>Efervescência (bolhas em líquido)</span></div>
+      <div class="emoji-line"><span class="emoji">🔥</span><span>Liberação de energia (calor ou luz)</span></div>
+      <div class="emoji-line"><span class="emoji">⬇️</span><span>Formação de um sólido (precipitado)</span></div>
+      <div class="emoji-line"><span class="emoji">💨</span><span>Produção de fumaça</span></div>`
+    },
+    {
+      title:"Fenômenos no Cotidiano",
+      html:`<p>É fundamental saber diferenciar fenômenos físicos de químicos no dia a dia:</p>
+      <div class="emoji-line"><span class="emoji">🌧️</span><span><strong>Chuvas</strong> — Fenômeno FÍSICO (evaporação e condensação). A água muda de estado mas continua sendo H₂O.</span></div>
+      <div class="emoji-line"><span class="emoji">🌿</span><span><strong>Fotossíntese</strong> — Fenômeno QUÍMICO (CO₂ + H₂O → Glicose + O₂). Novas substâncias são formadas.</span></div>
+      <p><strong>Na cozinha:</strong></p>
+      <div class="emoji-line"><span class="emoji">♨️</span><span>Ferver água = fenômeno <strong>físico</strong></span></div>
+      <div class="emoji-line"><span class="emoji">🎂</span><span>Assar bolo = fenômeno <strong>químico</strong> (fermentação, caramelização)</span></div>
+      <div class="emoji-line"><span class="emoji">🔪</span><span>Cortar legumes = fenômeno <strong>físico</strong></span></div>
+      <div class="emoji-line"><span class="emoji">🍳</span><span>Fritar ovo = fenômeno <strong>químico</strong> (desnaturação proteica)</span></div>
+      <div class="highlight"><strong>Dica:</strong> Se a substância pode voltar ao que era antes facilmente, provavelmente é físico. Se não pode, é químico!</div>`
+    }
+  ],
+  quiz:[
+    {q:"Assinale a opção que cita um fenômeno físico:",opts:["Prego enferrujando","Roupa secando no varal","Queima da gasolina","Vela acesa"],c:1,exp:"Roupa secando no varal é evaporação da água — fenômeno físico onde a água muda de estado sem alterar sua composição."},
+    {q:"Qual dos processos abaixo é um fenômeno químico?",opts:["Picolé derretendo","Ventilador funcionando","Moça movendo cadeira","Manicure removendo esmalte com acetona"],c:3,exp:"A remoção do esmalte com acetona envolve dissolução (reação química). Os demais são fenômenos físicos."},
+    {q:"Na sublimação da naftalina, o que ocorre?",opts:["Fenômeno químico — a naftalina se decompõe","Fenômeno físico — passa do sólido para o gasoso","Fenômeno químico — formam-se novas substâncias","Fenômeno físico — a naftalina derrete"],c:1,exp:"A sublimação é mudança de estado (sólido → gasoso), um fenômeno físico. A naftalina não se decompõe."},
+    {q:"Qual sinal NÃO indica obrigatoriamente um fenômeno químico?",opts:["Mudança de cor","Efervescência","Mudança de temperatura","Formação de precipitado"],c:2,exp:"Mudança de temperatura pode ocorrer em fenômenos físicos (aquecer água) e químicos (combustão)."},
+    {q:"Combustão da madeira é um fenômeno:",opts:["Físico","Químico","Físico-químico","Nenhuma das anteriores"],c:1,exp:"A combustão da madeira é um fenômeno químico — reage com O₂ formando CO₂ e H₂O, substâncias diferentes."}
+  ]
+},
+{
+  id:4, title:"Reações Químicas", subtitle:"Leis ponderais, equações químicas e tipos de reações",
+  icon:"⚖️", color:"var(--mod4)", colorHex:"#74B9FF",
+  sections:[
+    {
+      title:"O que são Reações Químicas?",
+      html:`<p>Uma <strong>reação química</strong> é um processo que altera as substâncias iniciais, transformando-as em outras com propriedades químicas diferentes.</p>
+      <p>No fim do século XVIII, cientistas concluíram que as reações obedecem a certas leis:</p>
+      <div class="emoji-line"><span class="emoji">⚖️</span><span><strong>Leis Ponderais</strong> — Relações entre as MASSAS de reagentes e produtos.</span></div>
+      <div class="emoji-line"><span class="emoji">📐</span><span><strong>Leis Volumétricas</strong> — Relações entre os VOLUMES de gases.</span></div>
+      <p><strong>Reações químicas no dia a dia:</strong></p>
+      <div class="emoji-line"><span class="emoji">🪵</span><span>Queima de lenha (combustão)</span></div>
+      <div class="emoji-line"><span class="emoji">🎂</span><span>Assar bolo (fermentação)</span></div>
+      <div class="emoji-line"><span class="emoji">🍌</span><span>Apodrecimento de frutas (decomposição)</span></div>
+      <div class="emoji-line"><span class="emoji">🫁</span><span>Digestão (metabolismo)</span></div>
+      <div class="emoji-line"><span class="emoji">🥚</span><span>Cozinhar ovos (desnaturação proteica)</span></div>
+      <div class="emoji-line"><span class="emoji">🎆</span><span>Fogos de artifício (combustão da pólvora)</span></div>`
+    },
+    {
+      title:"Lei de Lavoisier — Conservação das Massas",
+      html:`<div class="highlight">"Na natureza nada se cria, nada se perde, tudo se transforma." — Antoine Lavoisier</div>
+      <p>A soma das massas dos <strong>reagentes</strong> em um recipiente fechado é IGUAL à soma das massas dos <strong>produtos</strong>.</p>
+      <p><strong>Fórmula geral:</strong></p>
+      <div class="emoji-line"><span class="emoji">📝</span><span>A + B → C + D<br><strong>mA + mB = mC + mD</strong></span></div>
+      <p><strong>Exemplo prático:</strong></p>
+      <div class="emoji-line"><span class="emoji">🧮</span><span>12g de carbono + 32g de oxigênio = <strong>44g de gás carbônico</strong><br>12 + 32 = 44 ✓</span></div>
+      <div class="highlight">A massa total NUNCA muda numa reação química — os átomos se rearranjam, mas não são criados nem destruídos.</div>`
+    },
+    {
+      title:"Lei de Proust e Lei de Dalton",
+      html:`<p><strong>📜 Lei de Proust (Proporções Constantes):</strong></p>
+      <div class="highlight">Uma substância composta é formada por substâncias mais simples, unidas SEMPRE na mesma proporção em massa.</div>
+      <div class="emoji-line"><span class="emoji">🧮</span><span><strong>Exemplo:</strong> Na formação do CaO, o cálcio e o oxigênio se combinam sempre na proporção de <strong>1:2,5</strong> em massa.</span></div>
+      <p>Em experiências diferentes: <strong>mA₁/mB₁ = mA₂/mB₂ = constante</strong></p>
+      <br>
+      <p><strong>📜 Lei de Dalton (Proporções Múltiplas):</strong></p>
+      <div class="highlight">Se a massa de uma substância pode combinar-se com diferentes massas de outra, formando compostos distintos, essas massas estarão em razão de números inteiros simples.</div>
+      <div class="emoji-line"><span class="emoji">🧮</span><span><strong>Exemplo:</strong> Carbono forma CO (com 16g de O) e CO₂ (com 32g de O). Razão: 16:32 = <strong>1:2</strong> (inteiros simples).</span></div>`
+    },
+    {
+      title:"Equações Químicas e Símbolos",
+      html:`<p>As reações são representadas por <strong>equações químicas</strong> que mostram todas as substâncias em proporções adequadas.</p>
+      <div class="highlight"><strong>REAGENTES → PRODUTOS</strong><br>Exemplo: 2H₂O → 2H₂ + O₂</div>
+      <div class="emoji-line"><span class="emoji">⬅️</span><span><strong>Reagentes:</strong> Substâncias que reagem entre si.</span></div>
+      <div class="emoji-line"><span class="emoji">➡️</span><span><strong>Produtos:</strong> Substâncias formadas na reação.</span></div>
+      <p><strong>Símbolos importantes:</strong></p>
+      <div class="emoji-line"><span class="emoji">📋</span><span><strong>(s)</strong> Sólido · <strong>(l)</strong> Líquido · <strong>(g)</strong> Gasoso · <strong>(aq)</strong> Solução Aquosa</span></div>
+      <div class="emoji-line"><span class="emoji">📋</span><span><strong>∆</strong> Aquecimento · <strong>cat</strong> Catalisador · <strong>↗</strong> Liberação de gás · <strong>↓</strong> Precipitado · <strong>λ</strong> Luz</span></div>
+      <p><strong>Exemplo completo:</strong></p>
+      <div class="emoji-line"><span class="emoji">🧪</span><span>NaCl(aq) + AgNO₃(aq) → AgCl(s)↓ + NaNO₃(aq)</span></div>`
+    },
+    {
+      title:"Tipos de Reações Químicas",
+      html:`<div class="emoji-line"><span class="emoji">🟢</span><span><strong>1. Síntese (Adição): A + B → AB</strong><br>Dois ou mais reagentes geram UM ÚNICO produto.<br>Ex: C(s) + O₂(g) → CO₂(g)</span></div>
+      <div class="emoji-line"><span class="emoji">🔴</span><span><strong>2. Análise (Decomposição): AB → A + B</strong><br>UM reagente se decompõe em dois ou mais produtos.<br>• Pirólise (calor/∆): CaCO₃ → CaO + CO₂<br>• Fotólise (luz/λ): 2AgBr → 2Ag + Br₂<br>• Eletrólise (eletricidade): 2H₂O → 2H₂ + O₂</span></div>
+      <div class="emoji-line"><span class="emoji">🟡</span><span><strong>3. Simples Troca: A + BC → B + AC</strong><br>Substância simples reage com composta, gerando nova simples e outra composta.<br>Ex: Zn(s) + 2HCl(aq) → ZnCl₂(aq) + H₂(g)</span></div>
+      <div class="emoji-line"><span class="emoji">🟠</span><span><strong>4. Dupla Troca: AB + CD → AD + CB</strong><br>Duas compostas reagem gerando duas NOVAS compostas.<br>Ex: NaOH + HCl → NaCl + H₂O<br><em>(Neutralização: Base + Ácido → Sal + Água)</em></span></div>`
+    },
+    {
+      title:"Fatores que Afetam a Velocidade",
+      html:`<p>Diversos fatores podem <strong>acelerar ou retardar</strong> uma reação:</p>
+      <div class="emoji-line"><span class="emoji">🌡️</span><span><strong>Temperatura</strong> — Maior temperatura = maior velocidade. O calor aumenta a energia cinética das moléculas.</span></div>
+      <div class="emoji-line"><span class="emoji">💨</span><span><strong>Pressão</strong> — Maior pressão diminui o volume e aumenta a concentração (principalmente para gases).</span></div>
+      <div class="emoji-line"><span class="emoji">🧪</span><span><strong>Concentração</strong> — Mais moléculas = mais colisões = reação mais rápida.</span></div>
+      <div class="emoji-line"><span class="emoji">📐</span><span><strong>Superfície de Contato</strong> — Maior superfície = mais moléculas reagindo. (Comprimido triturado dissolve mais rápido!)</span></div>
+      <div class="emoji-line"><span class="emoji">💡</span><span><strong>Luz</strong> — Energia eletromagnética que pode fornecer a energia de ativação necessária.</span></div>
+      <div class="emoji-line"><span class="emoji">⚡</span><span><strong>Catalisador</strong> — Aumenta a velocidade sem ser consumido no processo.</span></div>`
+    }
+  ],
+  quiz:[
+    {q:"Qual reação exemplifica uma síntese?",opts:["Zn + Pb(NO₃)₂ → Zn(NO₃)₂ + Pb","FeS + 2HCl → FeCl₂ + H₂S","2NaNO₃ → 2NaNO₂ + O₂","N₂ + 3H₂ → 2NH₃"],c:3,exp:"N₂ + 3H₂ → 2NH₃ é síntese: dois reagentes se combinam formando um único produto."},
+    {q:"Qual alternativa mostra uma reação de análise (decomposição)?",opts:["N₂ + 3H₂ → 2NH₃","2HNO₃ + Ca(OH)₂ → Ca(NO₃)₂ + 2H₂O","BaCl₂ + H₂SO₄ → BaSO₄ + 2HCl","C₁₂H₂₂O₁₁ → 12C + 11H₂O"],c:3,exp:"C₁₂H₂₂O₁₁ → 12C + 11H₂O é decomposição: UM reagente (sacarose) se divide em dois produtos."},
+    {q:"Segundo a Lei de Lavoisier, se 10g de A reagem com 5g de B, qual a massa total dos produtos?",opts:["5g","10g","15g","20g"],c:2,exp:"Pela Conservação das Massas: 10g + 5g = 15g de produtos. A massa total nunca muda."},
+    {q:"A reação Cu + H₂SO₄ → CuSO₄ + H₂ é classificada como:",opts:["Síntese","Análise","Simples Troca","Dupla Troca"],c:2,exp:"É Simples Troca: substância simples (Cu) reage com composta (H₂SO₄), deslocando o hidrogênio."},
+    {q:"NaOH + HCl → NaCl + H₂O é um exemplo de:",opts:["Síntese total","Decomposição por pirólise","Simples troca","Dupla troca (neutralização)"],c:3,exp:"É Dupla Troca e especificamente Neutralização: Base + Ácido → Sal + Água."}
+  ]
+}
+];
+
+// ══════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════
+let currentModule = null;
+let currentSection = 0;
+let currentTab = 'content';
+let quizState = {}; // { answers: {}, revealed: {} }
+let completedModules = new Set();
+let breakShownAfter = new Set();
+let breakTimerInterval = null;
+
+// ══════════════════════════════════════════════════════
+//  RENDER HOME
+// ══════════════════════════════════════════════════════
+function renderHome() {
+  const grid = document.getElementById('modulesGrid');
+  grid.innerHTML = MODULES.map((m, i) => `
+    <div class="mod-card animate-up delay-${i+1}" data-mod="${m.id}" onclick="openModule(${m.id})">
+      <span class="mod-card-icon">${m.icon}</span>
+      <p class="mod-card-num">Módulo ${String(m.id).padStart(2,'0')}</p>
+      <h3>${m.title}</h3>
+      <p>${m.subtitle}</p>
+      <div class="mod-card-tags">
+        <span class="mod-card-tag">📖 ${m.sections.length} tópicos</span>
+        <span class="mod-card-tag">✏️ ${m.quiz.length} atividades</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════════════════════════════
+//  OPEN MODULE
+// ══════════════════════════════════════════════════════
+function openModule(id) {
+  currentModule = MODULES.find(m => m.id === id);
+  currentSection = 0;
+  currentTab = 'content';
+  quizState = { answers: {}, revealed: {} };
+
+  document.getElementById('home-page').style.display = 'none';
+  document.getElementById('module-page').style.display = 'block';
+
+  renderTopBar();
+  renderSidebar();
+  renderContent();
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+
+function goHome() {
+  document.getElementById('home-page').style.display = 'block';
+  document.getElementById('module-page').style.display = 'none';
+  currentModule = null;
+  document.getElementById('progressBar').style.width = '0';
+  closeSidebar();
+}
+
+// ══════════════════════════════════════════════════════
+//  TOP BAR
+// ══════════════════════════════════════════════════════
+function renderTopBar() {
+  const m = currentModule;
+  document.getElementById('topModNum').textContent = `Módulo ${String(m.id).padStart(2,'0')}`;
+  document.getElementById('topModNum').style.color = m.colorHex;
+  document.getElementById('topModTitle').textContent = m.title;
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('tabContent').classList.toggle('active', tab === 'content');
+  document.getElementById('tabQuiz').classList.toggle('active', tab === 'quiz');
+  document.getElementById('tabContent').style.background = tab === 'content' ? currentModule.colorHex : 'transparent';
+  document.getElementById('tabContent').style.color = tab === 'content' ? '#0B1215' : '';
+  document.getElementById('tabQuiz').style.background = tab === 'quiz' ? currentModule.colorHex : 'transparent';
+  document.getElementById('tabQuiz').style.color = tab === 'quiz' ? '#0B1215' : '';
+  if (tab === 'content') {
+    document.getElementById('sidebar').style.display = '';
+    renderContent();
+  } else {
+    document.getElementById('sidebar').style.display = 'none';
+    renderQuiz();
+  }
+  closeSidebar();
+  document.getElementById('mainArea').scrollTo(0, 0);
+  updateProgress();
+}
+
+// ══════════════════════════════════════════════════════
+//  SIDEBAR
+// ══════════════════════════════════════════════════════
+function renderSidebar() {
+  const m = currentModule;
+  // Topics
+  document.getElementById('sidebarTopics').innerHTML = m.sections.map((s, i) => `
+    <button class="sidebar-item ${i === currentSection ? 'active' : ''}" onclick="goSection(${i})">
+      <span class="sidebar-num">${i + 1}</span>
+      <span>${s.title}</span>
+    </button>
+  `).join('');
+
+  // Modules
+  document.getElementById('sidebarModules').innerHTML = MODULES.map(mod => `
+    <button class="sidebar-mod-btn ${mod.id === m.id ? 'current' : ''}" onclick="openModule(${mod.id})">
+      ${mod.icon} ${mod.title}
+    </button>
+  `).join('');
+}
+
+function goSection(i) {
+  currentSection = i;
+  renderSidebar();
+  renderContent();
+  updateProgress();
+  closeSidebar();
+  document.getElementById('mainArea').scrollTo(0, 0);
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('mobileOverlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('mobileOverlay').classList.remove('show');
+}
+
+// ══════════════════════════════════════════════════════
+//  CONTENT
+// ══════════════════════════════════════════════════════
+function renderContent() {
+  const m = currentModule;
+  const s = m.sections[currentSection];
+  const wrap = document.getElementById('contentWrap');
+
+  const prevBtn = currentSection > 0
+    ? `<button class="btn-nav btn-prev" onclick="goSection(${currentSection - 1})">← Tópico anterior</button>`
+    : '<span></span>';
+
+  let nextBtn;
+  if (currentSection < m.sections.length - 1) {
+    nextBtn = `<button class="btn-nav btn-next" onclick="goSection(${currentSection + 1})">Próximo tópico →</button>`;
+  } else {
+    nextBtn = `<button class="btn-nav btn-quiz" onclick="switchTab('quiz')">✏️ Ir para atividades</button>`;
+  }
+
+  wrap.innerHTML = `
+    <div class="animate-up">
+      <span class="section-badge" style="background:${m.colorHex}22;color:${m.colorHex}">
+        Tópico ${currentSection + 1} de ${m.sections.length}
+      </span>
+      <h1 class="content-title">${s.title}</h1>
+      <div class="content-card">${s.html}</div>
+      <div class="nav-buttons">
+        ${prevBtn}
+        ${nextBtn}
+      </div>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════════════════
+//  QUIZ
+// ══════════════════════════════════════════════════════
+function renderQuiz() {
+  const m = currentModule;
+  const wrap = document.getElementById('contentWrap');
+
+  let html = `
+    <div class="quiz-header animate-up">
+      <span class="q-icon">${m.icon}</span>
+      <h2 style="color:${m.colorHex}">Atividades — ${m.title}</h2>
+      <p>Teste seus conhecimentos com ${m.quiz.length} questões</p>
+    </div>
+  `;
+
+  m.quiz.forEach((q, qi) => {
+    const answered = quizState.answers[qi] !== undefined;
+    const revealed = quizState.revealed[qi];
+    const isCorrect = revealed && quizState.answers[qi] === q.c;
+    const cardClass = revealed ? (isCorrect ? 'correct' : 'wrong') : '';
+
+    html += `<div class="quiz-card ${cardClass} animate-up delay-${Math.min(qi+1,4)}" id="qcard-${qi}">`;
+    html += `<div class="q-top">
+      <span class="q-badge" style="background:${m.colorHex}">${qi+1}/${m.quiz.length}</span>
+      <p class="q-text">${q.q}</p>
+    </div>`;
+    html += `<div class="q-options">`;
+
+    q.opts.forEach((opt, oi) => {
+      const selected = quizState.answers[qi] === oi;
+      const isRight = oi === q.c;
+      let cls = 'q-option';
+      if (revealed) {
+        cls += ' locked';
+        if (isRight) cls += ' revealed-right';
+        else if (selected && !isRight) cls += ' revealed-wrong';
+      } else if (selected) {
+        cls += ' selected';
+      }
+      html += `<button class="${cls}" onclick="selectAnswer(${qi},${oi})">
+        <span class="q-letter">${String.fromCharCode(65+oi)}</span>
+        <span>${opt}</span>
+        ${revealed && isRight ? '<span style="margin-left:auto;font-size:18px">✓</span>' : ''}
+      </button>`;
+    });
+    html += '</div>';
+
+    if (answered && !revealed) {
+      html += `<button class="btn-check" style="background:${m.colorHex}" onclick="checkAnswer(${qi})">Verificar resposta</button>`;
+    }
+
+    if (revealed) {
+      const fbClass = isCorrect ? 'is-correct' : 'is-wrong';
+      const fbTitle = isCorrect
+        ? '🎉 Muito bem! Resposta correta!'
+        : 'Infelizmente não é a correta, mas vamos lá, tente absorver o conceito! 💪';
+      html += `<div class="q-feedback ${fbClass}">
+        <p class="q-feedback-title">${fbTitle}</p>
+        <p class="q-feedback-text">${q.exp}</p>
+      </div>`;
+    }
+
+    html += '</div>';
+  });
+
+  // Score
+  const totalRevealed = Object.keys(quizState.revealed).length;
+  if (totalRevealed === m.quiz.length) {
+    let score = 0;
+    m.quiz.forEach((q, i) => { if (quizState.answers[i] === q.c) score++; });
+    let msg;
+    if (score === m.quiz.length) msg = 'Parabéns! Desempenho perfeito! 🌟';
+    else if (score >= m.quiz.length * 0.6) msg = 'Bom trabalho! Continue estudando para melhorar! 📚';
+    else msg = 'Não desanime! Revise o conteúdo e tente novamente. Você vai conseguir! 💪';
+
+    html += `<div class="score-box animate-pop" style="background:${m.colorHex}">
+      <div class="score-num">${score}/${m.quiz.length}</div>
+      <p class="score-msg">${msg}</p>
+      <button class="btn-redo" onclick="redoQuiz()">Refazer atividades</button>
+    </div>`;
+
+    // Mark module as completed
+    if (!completedModules.has(m.id)) {
+      completedModules.add(m.id);
+      checkBreakPopup();
+    }
+  }
+
+  wrap.innerHTML = html;
+}
+
+function selectAnswer(qi, oi) {
+  if (quizState.revealed[qi]) return;
+  quizState.answers[qi] = oi;
+  renderQuiz();
+}
+
+function checkAnswer(qi) {
+  quizState.revealed[qi] = true;
+  renderQuiz();
+  // Scroll to feedback
+  setTimeout(() => {
+    const card = document.getElementById(`qcard-${qi}`);
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 100);
+}
+
+function redoQuiz() {
+  quizState = { answers: {}, revealed: {} };
+  renderQuiz();
+  document.getElementById('mainArea').scrollTo(0, 0);
+}
+
+// ══════════════════════════════════════════════════════
+//  BREAK POPUP
+// ══════════════════════════════════════════════════════
+function checkBreakPopup() {
+  const completed = completedModules.size;
+  // Show break after every 2 modules
+  const breakPoint = Math.floor(completed / 2);
+  if (completed >= 2 && completed % 2 === 0 && !breakShownAfter.has(breakPoint)) {
+    breakShownAfter.add(breakPoint);
+    showBreak();
+  }
+}
+
+function showBreak() {
+  const popup = document.getElementById('breakPopup');
+  popup.classList.add('show');
+  document.body.style.overflow = 'hidden';
+
+  let seconds = 600; // 10 minutes
+  const btn = document.getElementById('btnBreak');
+  btn.disabled = true;
+  btn.textContent = 'Aguarde um pouquinho... ⏳';
+
+  updateBreakTimer(seconds);
+  breakTimerInterval = setInterval(() => {
+    seconds--;
+    updateBreakTimer(seconds);
+    if (seconds <= 540) { // after 1 min allow skip
+      btn.disabled = false;
+      btn.textContent = 'Estou pronto para continuar! 🚀';
+    }
+    if (seconds <= 0) {
+      clearInterval(breakTimerInterval);
+      btn.disabled = false;
+      btn.textContent = 'Vamos lá! 🚀';
+    }
+  }, 1000);
+}
+
+function updateBreakTimer(secs) {
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  document.getElementById('breakTimer').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function closeBreak() {
+  clearInterval(breakTimerInterval);
+  document.getElementById('breakPopup').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ══════════════════════════════════════════════════════
+//  PROGRESS BAR
+// ══════════════════════════════════════════════════════
+function updateProgress() {
+  if (!currentModule) return;
+  const bar = document.getElementById('progressBar');
+  bar.style.background = currentModule.colorHex;
+
+  if (currentTab === 'content') {
+    const pct = ((currentSection + 1) / currentModule.sections.length) * 100;
+    bar.style.width = pct + '%';
+  } else {
+    const revealed = Object.keys(quizState.revealed).length;
+    const pct = (revealed / currentModule.quiz.length) * 100;
+    bar.style.width = pct + '%';
+  }
+}
+
+// ══════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════
+renderHome();
+// Set initial tab colors
+switchTab('content');
+</script>
+</body>
+</html>
